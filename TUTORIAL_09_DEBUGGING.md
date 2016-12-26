@@ -59,12 +59,12 @@ program and wait there.
 To set a breakpoint all you need to do is left-click just to the right of
 the line number you are interested in. When a breakpoint is set correctly
 you will see a small red circle next to the line number.
-![Setting Breakpoint](https://github.com/jspyeatt/something/DEBUG_01.png "Setting breakpoint")
+![Setting Breakpoint](https://github.com/jspyeatt/java_00_basics/blob/master/DEBUG_01.PNG "Setting breakpoint")
 
 So we just set a breakpoint at the line `if (name.equals("Goofy") || name.equals("Pluto")) {`.
 Now to run the program in debug mode, in the top nav click on Run->Debug DebuggingExample.
 When you do this you will notice that the program stops at the line in question and is 
-highlighted in blue ![Setting Breakpoint](https://github.com/jspyeatt/something/DEBUG_02.png "Suspended").
+highlighted in blue ![Setting Breakpoint](https://github.com/jspyeatt/java_00_basics/blob/master/DEBUG_02.PNG "Suspended").
 
 The program is now suspended. In the lower right window you will notice the `data` and `name` variables
 appear. If you click on the `data` variable in that window it will expand and show you more information.
@@ -77,14 +77,14 @@ I've also highlighted some control buttons you will probably use.
    into the equals() method.
 
 Hit the green arrow until the name = "pluto" appears in the lower right window.
-![Setting Breakpoint](https://github.com/jspyeatt/something/DEBUG_03.png "Suspended").
+![Setting Breakpoint](https://github.com/jspyeatt/java_00_basics/blob/master/DEBUG_03.PNG "Suspended").
 
 Now while in the lower right window if you right-click and select Evaluate Expression a window
 will pop up. This allows you to write small snippets of java code and it will be evaluated
 with the variables defined in your running program. So enter the text you see in the picture
-![Evaluate](https://github.com/jspyeatt/something/DEBUG_04.png "Evaluate"). Then click on
+![Evaluate](https://github.com/jspyeatt/java_00_basics/blob/master/DEBUG_04.PNG "Evaluate"). Then click on
 evaluate. You will see the result is `false`. But why? The reason is because "Pluto" does
 not equal "pluto". Change the evaluation to `name.equals("Pluto")` and the result should be
-true ![Evaluate](https://github.com/jspyeatt/something/DEBUG_05.png "Evaluate").
+true ![Evaluate](https://github.com/jspyeatt/java_00_basics/blob/master/DEBUG_05.PNG "Evaluate").
 
 That's all we are going to do for now regarding debugging.
