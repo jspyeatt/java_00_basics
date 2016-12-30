@@ -6,20 +6,32 @@ import java.awt.*;
  * Created by John on 12/26/2016.
  */
 public class Brick {
+    static final int WIDTH = 80;
+    static final int HEIGHT = 20;
+    static final int SEPARATION = 2;
     private int points;
-    private int width;
-    private int height;
+    int x;
+    int y;
     private Color color;
+
+    public Brick(Color c, int points, int x, int y) {
+        color = c;
+        this.x = x;
+        this.y = y;
+        this.points = points;
+    }
 
     public int getPoints() {
         return points;
     }
 
-    public int getWidth() {
-        return width;
+    void paint(Graphics2D g) {
+        g.setColor(color);
+        g.fillRect(x, y, WIDTH, HEIGHT);
+        g.setColor(Color.BLACK);
+        g.drawRect(x, y, WIDTH, HEIGHT);
     }
-
-    public int getHeight() {
-        return height;
+    Rectangle getBounds() {
+        return new Rectangle(x, y, WIDTH, HEIGHT);
     }
 }
