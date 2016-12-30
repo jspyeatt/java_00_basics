@@ -88,3 +88,6 @@ not equal "pluto". Change the evaluation to `name.equals("Pluto")` and the resul
 true ![Evaluate](https://github.com/jspyeatt/java_00_basics/blob/master/DEBUG_05.PNG "Evaluate").
 
 That's all we are going to do for now regarding debugging.
+
+In the [next section](TUTORIAL_10_BREAKOUT_DESIGN.md) we will start working on the design of
+the game.

@@ -384,7 +384,201 @@ if (u1.equals(u2)) {
 **VERY IMPORTANT** Note that when comparing primatives for equality we use `==`
 but when comparing objects for equality we use `equals()`
 
-We went over an ENORMOUS amount of stuff here. There's a lot more to learn
-about classes. We will pick them up again later.
+## Inheritance
+The last thing we will discuss in this section is the notion of inheritance. Java, as mentioned
+earlier is an object-oriented language. Inheritance allows you to create new objects by *inheriting*
+attributes and behavior from other classes. We will use a lot of inheritance when we build the Breakout
+game. For now we will just make a glancing blow over the topic.
+
+Classes, as discussed earlier, have attributes. This is called the "has-a" relationship. A car "has-a" horn.
+A game "has-a" ball. Inheritance has an "is-a" relationship. For example, a dog "is-a" animal. So is a snake.
+So is a chicken. Let's show how to create an Animal class and then create a dog, snake and chicken sub-class.
+
+1. Hit Alt+1 to bring up the Project window.
+1. Right click on the com.javatutorial folder and select New->Package. Enter zoo.
+1. Right click on the zoo folder and select New->Java Class. Enter Animal and paste the following
+into the Animal.java file.
+
+```java
+package com.javatutorial.zoo;
+
+/**
+ * This is our base Animal class. All our other animal classes with be extended 
+ * from this class.
+ * 
+ * This particular class is also 'abstract'. That means that this class cannot 
+ * directly be instantiated. In other words you cannot create a specific
+ * instance of Animal like this.
+ * <pre>
+ *     Animal a = new Animal("Fred", 4, false);
+ * </pre>
+ * An abstract class can be thought of as a template to be used by the subclasses.
+ */
+public abstract class Animal {
+    int numberOfLegs;
+    boolean hasFur;
+    String name;
+
+    public Animal(String n, int legs, boolean fur) {
+        this.name = n;
+        this.numberOfLegs = legs;
+        this.hasFur = fur;
+    }
+
+    public void printSummary() {
+        System.out.println(name + " has " + numberOfLegs + " legs and " + ((hasFur) ? "fur" : "no fur"));
+    }
+
+    /**
+     * This is called an abstract method. Note that it has no {} braces. When you see an abstract
+     * method that indicates to the developer that if he wants to extend the Animal subclass he
+     * MUST implement a makeNoise() method.
+     */
+    public abstract void makeNoise();
+}
+```
+
+Now let's extend the Animal class to create a Dog class.
+1. Alt+1 to make certain the Project Window is open.
+1. Right-click on the zoo folder and select New->Java Class. Enter Dog.
+1. Now change the line:
+```
+public class Dog {
+```
+to this
+```
+public class Dog extends Animal {
+```
+When you do this you will notice that IntelliJ highlights the line in red indicating an error
+exists. The error is because you've extended the Animal class but have not implemented the abstract
+makeNoise() method. If you hover over the red line with your mouse and hit Cntl+I it will ask you
+if you want to implement the abstract makeNoise() method. Click OK.
+
+Your Dog.java file should now look like this:
+```java
+package com.javatutorial.zoo;
+
+public class Dog extends Animal {
+
+    @Override
+    public void makeNoise() {
+        
+    }
+}
+```
+You still have a red line appearing. That's because we haven't implemented a constructor
+for the Dog class. Let's finish off the Dog class.
+```java
+package com.javatutorial.zoo;
+
+public class Dog extends Animal {
+
+    /**
+     * This is the constructor for Dog.
+     *
+     * Notice 2 things:
+     * <ol>
+     *     <li>The constructor only takes one argument (name)</li>
+     *     <li>It calls this constructor `super`. What's that? super indicates that it is going
+     *     to call the constructor of its parent class. In this case, the Animal class. So this
+     *     line of code is calling the Animal constructor and we are just passing in the number
+     *     of legs and fur attribute for all dogs the same way.</li>
+     * </ol>
+     * @param name
+     */
+    public Dog(String name) {
+        super(name, 4, true);
+    }
+
+    /**
+     * Here is our implementation of the Animal class's abstract makeNoise() method. Now that
+     * we have an actual implementation of makeNoise() it is called a concrete method.
+     */
+    @Override
+    public void makeNoise() {
+        System.out.println("Bark!");
+    }
+}
+```
+
+Now let's create a Chicken class
+1. Alt+1
+1. Right-click on the zoo folder and select New->Java Class. Enter Chicken. And paste the following
+in Chicken.java.
+```java
+package com.javatutorial.zoo;
+
+public class Chicken extends Animal {
+    public Chicken(String n) {
+        super(n, 2, false);
+    }
+    @Override
+    public void makeNoise() {
+        System.out.println("Cluck");
+    }
+}
+```
+
+Now let's create a Snake class
+1. Alt+1
+1. Right-click on the zoo folder and select New->Java Class. Enter Snake. And paste the following
+in Snake.java.
+```java
+package com.javatutorial.zoo;
+
+public class Snake extends Animal {
+    public Snake(String n) {
+        super(n, 0, false);
+    }
+    @Override
+    public void makeNoise() {
+        System.out.println("ssssssssssss");
+    }
+}
+```
+
+Finally let's create a Zoo class and run the Zoo program.
+1. Alt+1
+1. Right-click on the zoo folder. Select New-> Java Class. Enter Zoo and paste the following
+into the Zoo.java file.
+```java
+package com.javatutorial.zoo;
+public class Zoo {
+    public static void main(String[] args) {
+        // first thing to notice is that a1, a2 and a3 are defined as Animal variables
+        // yet the constructors are for Dog, Chicken and Snake. We can do this because
+        // Dog, for example 'is-a' Animal. We couldn't do the reverse and say
+        //    Dog d1 = Animal("Snoopy", 4, true); because an Animal isn't necessarily 
+        // a dog.
+        Animal a1 = new Dog("Snoopy");
+        Animal a2 = new Chicken("Foghorn Leghorn");
+        Animal a3 = new Snake("Ka");
+
+        // notice each of these makeNoise() and printSummary() calls look the same, but their outcomes
+        // are different.
+        a1.makeNoise();
+        a2.makeNoise();
+        a3.makeNoise();
+        a1.printSummary();
+        a2.printSummary();
+        a3.printSummary();
+    }
+}
+```
+Now let's run it.
+1. Shift+Cntl+F10
+The output will look like this:
+```
+Bark!
+Cluck
+ssssssssssss
+Snoopy has 4 legs and fur
+Foghorn Leghorn has 2 legs and no fur
+Ka has 0 legs and no fur
+```
+
+We went over an **ENORMOUS** amount of stuff here. There's a lot more to learn
+about classes. We will pick them up again later when we start working with the graphics
+library for java.
 
 In the [next section](TUTORIAL_07_COLLECTIONS.md) we will go over collections and arrays.
